@@ -1,0 +1,79 @@
+"""Small, dependency-free UI text map for the adapter GUI."""
+from __future__ import annotations
+
+
+ZH_TO_EN = {
+    'FF14 饰品适配器 · 第一版': 'FFXIV Accessory Adapter · v1',
+    'FF14 饰品适配器': 'FFXIV Accessory Adapter',
+    '语言 / Language': 'Language',
+    '步骤 1：选择原 Mod 装备模型、源种族参考模型、目标种族模型及输出路径。': 'Step 1: Select the modified mod equipment model, source-race reference model, target-race models, and output path.',
+    '第一版聚焦头部耳朵适配；PMP 构建不依赖成功案例，最终资源绑定由使用者在 Penumbra 中完成。': 'This version focuses on head/ear adaptation. PMP staging does not require a successful example; final resource binding is completed in Penumbra.',
+    '步骤 1 · 生成适配 GLB': 'Step 1 · Generate Adapted GLB',
+    '步骤 2 · GLB + 原版 MDL 构建 PMP': 'Step 2 · Build PMP from GLB + Original MDL',
+    '步骤 3 · Penumbra 绑定并保存': 'Step 3 · Bind and Save in Penumbra',
+    '原 Mod 修改后的装备模型（glTF/GLB）': 'Modified Equipment Model from Original Mod (glTF/GLB)',
+    '原种族原版装备模型（glTF/GLB/MDL）': 'Original Equipment Model of Source Race (glTF/GLB/MDL)',
+    '原种族身体模型（glTF/GLB）': 'Body Model of Source Race (glTF/GLB)',
+    '目标种族原版装备模型（glTF/GLB/MDL）': 'Original Equipment Model of Target Race (glTF/GLB/MDL)',
+    '目标种族身体模型（glTF/GLB）': 'Body Model of Target Race (glTF/GLB)',
+    '输出适配目标种族 GLB 文件路径': 'Output Path for Target-Race Adapted GLB',
+    '生成骨骼（当前版本暂不支持）': 'Generate Skeleton (not supported in this version)',
+    '检查输入并生成适配 GLB': 'Validate Inputs and Generate Adapted GLB',
+    '图片指引': 'Image Guide',
+    '源附件和身体模型支持 .gltf/.glb；装备参考支持 .gltf/.glb/.mdl。使用 .gltf 时，请保留同目录的 .bin 和纹理文件。当前版本主要验证头部耳朵适配，并使用 j_kao 骨骼。': 'Source accessory and body models support .gltf/.glb; equipment references support .gltf/.glb/.mdl. When using .gltf, keep its companion .bin and texture files in the same directory. This version focuses on head/ear adaptation and uses the j_kao bone.',
+    '步骤 1 生成的适配 GLB': 'Adapted GLB Generated in Step 1',
+    '原 Mod（PMP 格式）': 'Original Mod (PMP format)',
+    '目标种族原版装备 MDL（必需）': 'Original Equipment MDL of Target Race (Required)',
+    '要添加选项的原有选项组': 'Existing Option Group to Add the New Option To',
+    '选择步骤 1 的适配 GLB、原 Mod 的 PMP，以及目标种族完全原版装备 MDL。程序会创建目标种族专属模型资源和 Files 映射；不需要成功案例 ZIP。': 'Select the adapted GLB from Step 1, the original mod PMP, and the completely original equipment MDL for the target race. The tool creates a target-race model resource and Files mapping. No successful-example ZIP is required.',
+    '输出修改后 PMP 路径': 'Output Path for Modified PMP',
+    '目标种族': 'Target Race',
+    '同名选项已存在时替换（会清空该选项的资源映射）': 'Replace same-name option (clears mappings)',
+    '验证 GLB + MDL，构建并自检 PMP': 'Validate GLB + MDL, Build and Verify PMP',
+    '重要：输出 PMP 包含目标原版 MDL 占位资源和 Files 映射，但尚未包含适配后的游戏 MDL。步骤 3 需在 Penumbra 的 Models 中选中该映射模型，导入适配 GLB 并保存/导出最终 PMP。': 'Important: the output PMP contains the target original MDL as a placeholder and includes the Files mapping, but does not yet contain the adapted game MDL. In Step 3, select the mapped model in Penumbra Models, import the adapted GLB, then save/export the final PMP.',
+    '在 Penumbra 中完成最终模型绑定': 'Complete Final Model Binding in Penumbra',
+    '1. 导入步骤 2 生成的待绑定 PMP，并启用它。': '1. Import and enable the staging PMP generated in Step 2.',
+    '2. 勾选新增的目标种族选项（例如 Elezen Female）。': '2. Enable the newly added target-race option (for example, Elezen Female).',
+    '3. 进入 Advanced Editing → Models，选择以目标种族和性别开头的模型文件（MDL）。': '3. Open Advanced Editing → Models and select the MDL file whose name begins with the target race and gender identifiers.',
+    '4. 点击该模型的 Import/Export，导入步骤 1 生成的适配 GLB。Penumbra 会自动转换模型；记得保存修改！': '4. Click Import/Export for that model and import the adapted GLB generated in Step 1. Penumbra will convert the model automatically. Remember to save your changes!',
+    '5. （可选）重新导出 PMP，作为新的模组重新导入 Penumbra。': '5. (Optional) Export the PMP again and re-import it into Penumbra as a new mod.',
+    '注意：待绑定 PMP 先通过 Penumbra 的模组导入功能导入；Import/Export 中应导入适配 GLB，而不是再次导入 PMP。保存后可选重新导出最终 PMP。': 'Note: import the staging PMP through Penumbra’s mod import function first. In Import/Export, import the adapted GLB, not the PMP. After saving, you may optionally export the final PMP again.',
+    '运行日志 / 自检报告': 'Run Log / Validation Report',
+    '浏览…': 'Browse...',
+    'glTF/GLB 模型 (*.gltf; *.glb)': 'glTF/GLB models (*.gltf; *.glb)',
+    '独立 glTF JSON (*.gltf)': 'Standalone glTF JSON (*.gltf)',
+    '二进制 GLB (*.glb)': 'Binary GLB (*.glb)',
+    '二进制 GLB 输出 (*.glb)': 'Binary GLB output (*.glb)',
+    'FFXIV MDL 模型 (*.mdl)': 'FFXIV MDL model (*.mdl)',
+    'MDL 模型 (*.mdl)': 'MDL model (*.mdl)',
+    'Penumbra PMP (*.pmp)': 'Penumbra PMP (*.pmp)',
+    'ZIP 压缩包 (*.zip)': 'ZIP archive (*.zip)',
+    '选择从 Penumbra 导出的源附件 glTF/GLB': 'Select source accessory glTF/GLB exported from Penumbra',
+    '选择源种族原版装备模型（GLB 或 MDL）': 'Select original source-race equipment model (GLB or MDL)',
+    '选择源种族身体/骨架 glTF/GLB': 'Select source-race body/skeleton glTF/GLB',
+    '选择目标种族原版装备模型（GLB 或 MDL）': 'Select original target-race equipment model (GLB or MDL)',
+    '选择目标种族身体/骨架 glTF/GLB': 'Select target-race body/skeleton glTF/GLB',
+    '保存适配 GLB': 'Save Adapted GLB',
+    '选择步骤 1 生成的适配 GLB': 'Select adapted GLB generated in Step 1',
+    '选择目标种族完全原版装备 MDL': 'Select completely original target-race equipment MDL',
+    '选择原始母版 PMP': 'Select original mod PMP',
+    '保存待绑定 PMP': 'Save staging PMP',
+    '无法读取母版选项组': 'Unable to Read Option Groups from Source PMP',
+    '适配 GLB 已生成': 'Adapted GLB Generated',
+    '适配失败': 'Adaptation Failed',
+    '待绑定 PMP 已生成': 'Staging PMP Generated',
+    '构建失败': 'Build Failed',
+    '已就绪。': 'Ready.',
+    '已就绪。\n步骤 1：生成适配 GLB。\n步骤 2：选择适配 GLB、原 Mod PMP 和目标种族原版 MDL，创建带有实际模型映射的待绑定 PMP。\n步骤 3：在 Penumbra 的 Models 中选中已映射 MDL，导入 GLB，保存/导出最终 PMP。\n': 'Ready.\nStep 1: Generate the adapted GLB.\nStep 2: Select the adapted GLB, original mod PMP, and original target-race MDL to create a staging PMP with the model mapping.\nStep 3: In Penumbra Models, select the mapped MDL, import the GLB, then save/export the final PMP.\n',
+    'GLB 适配失败。': 'GLB adaptation failed.',
+    '待绑定 PMP 构建失败。': 'Staging PMP build failed.',
+}
+
+EN_TO_ZH = {english: chinese for chinese, english in ZH_TO_EN.items()}
+
+
+def translate_ui_text(text: str, language: str = 'zh') -> str:
+    """Translate known static UI text; leave user data and unknown messages unchanged."""
+    if language == 'en':
+        return ZH_TO_EN.get(text, text)
+    return EN_TO_ZH.get(text, text)

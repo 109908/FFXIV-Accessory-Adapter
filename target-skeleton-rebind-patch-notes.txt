@@ -1,0 +1,22 @@
+Target skeleton rebinding patch (2026-10-17)
+
+Root cause:
+The prior adapter only rewrote JOINTS_0 to the source skin's j_kao slot and shifted vertex Y. It kept the source skeleton hierarchy/local transforms and source inverseBindMatrices. That is not a real target-race skeleton rebind.
+
+Changes:
+- When target_skeleton_path is provided, choose the target Skin containing the requested head joint.
+- Map target joints by unique name to source node records.
+- Copy target-race joint local transforms and hierarchy.
+- Replace the active Skin's joints order and inverseBindMatrices with the target Skin's data.
+- Remove unselected mesh nodes and keep only the selected mesh/skin reachable in the active scene.
+- GUI uses the target equipment GLB/GLTF as the target skeleton reference when available; if the equipment input is MDL, it falls back to the target body/skeleton GLB.
+- Added real-sample and portable synthetic regression assertions.
+
+Validation in this environment:
+- 44 tests passed.
+- Real female target GLB check: 167 target joints; joint order matches; all inverse bind matrices match; 0 local-transform mismatches; 0 parent mismatches; 1 mesh/1 skin; GLB structural validation reports no errors.
+- Source mesh center relative to source j_kao: 0.112313128.
+- Output mesh center relative to female j_kao: 0.112313168.
+
+Limit:
+This verifies the produced GLB structure, not Penumbra's import/compiler output or in-game placement. The user must import the new GLB into the mapped female target MDL and check in game.

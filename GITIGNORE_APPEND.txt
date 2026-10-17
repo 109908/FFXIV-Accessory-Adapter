@@ -1,0 +1,25 @@
+# Local environments, generated builds, backups, and user/mod assets
+.venv/
+__pycache__/
+*.py[cod]
+build/
+dist/
+reports/
+.patch_backups/
+adapterpatch/
+ff14patch/
+.ff14_adapter_cache/
+*.backup
+*.backup-*
+*.bak
+*.pmp
+*.ttmp2
+*.mdl
+*.glb
+*.gltf
+*.mtrl
+*.tex
+*.bin
+*.exe
+*.zip
+*.diff
